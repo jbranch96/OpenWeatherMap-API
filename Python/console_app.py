@@ -4,7 +4,7 @@ This script calls the OpenWeatherMap API and will display weather data in the te
 The user will be able to interact with the application via the terminal in order to specify the Zip Code and Country Code to use
 during an API request. [2]
 
-Usage: app.py
+Usage: console_app.py
 """
 
 # standard library imports, [3]
@@ -150,3 +150,4 @@ def main():
 # run the main application by calling main ()
 if __name__ == '__main__': 
     main()
+    

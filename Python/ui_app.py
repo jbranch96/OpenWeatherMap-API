@@ -154,7 +154,7 @@ class MainApplication(tk.Frame):
         root.update()
 
         if file_data['API Key'] == '':
-            print('Failed to read API key from the Weather Map App Settings.cfg file, application will now terminate.')
+            print('Failed to read API key from the Weather Map App Settings.cfg file.')
 
         else:
             full_url = self.form_full_url() # build the full URL for the API call

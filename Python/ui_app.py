@@ -133,7 +133,7 @@ class MainApplication(tk.Frame):
         # Add display text entry field
         self.textbox_entry = tk.Entry(root , width= 110)
         self.textbox_entry.place(relx = 0.5, rely = 0.95, anchor = 'center')
-        self.textbox_entry.insert(-1 , 'Enter Zip Code and Country Code and select GET Data to get currentweather data via call to WeatherMap API Service')
+        self.textbox_entry.insert(-1 , 'Enter Zip Code and Country Code and select GET Data to get current weather data via call to WeatherMap API Service')
         self.textbox_entry.configure(state= 'readonly')
 
         # Add button widget for getting data
@@ -176,7 +176,7 @@ class MainApplication(tk.Frame):
                 print('Failed to reach: ' , full_url)
             self.textbox_entry.configure(state= 'normal')
             self.textbox_entry.delete(0 , tk.END)
-            self.textbox_entry.insert(-1 , 'Enter Zip Code and Country Code and select GET Data to get currentweather data via call to WeatherMap API Service')
+            self.textbox_entry.insert(-1 , 'Enter Zip Code and Country Code and select GET Data to get current weather data via call to WeatherMap API Service')
             self.textbox_entry.configure(state= 'readonly')
         return
     

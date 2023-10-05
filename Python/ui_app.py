@@ -134,6 +134,7 @@ class MainApplication(tk.Frame):
         self.textbox_entry = tk.Entry(root , width= 110)
         self.textbox_entry.place(relx = 0.5, rely = 0.95, anchor = 'center')
         self.textbox_entry.insert(-1 , 'Enter Zip Code and Country Code and select GET Data to get currentweather data via call to WeatherMap API Service')
+        self.textbox_entry.configure(state= 'readonly')
 
         # Add button widget for getting data
         get_data_btn = tk.Button(root , text= 'GET Data' , fg= 'black' , bg='silver' , command=self.get_data, width= 12)
@@ -146,7 +147,12 @@ class MainApplication(tk.Frame):
     # Function definition for when GET Data button is clicked
     def get_data(self):
         file_data = self.read_configinfo_from_file()
+        self.textbox_entry.configure(state= 'normal')
+        self.textbox_entry.delete(0 , tk.END)
         self.textbox_entry.insert(-1 , 'Fetching data from OpenWeatherMap API...')
+        self.textbox_entry.configure(state= 'readonly')
+        root.update()
+
         if file_data['API Key'] == '':
             print('Failed to read API key from the Weather Map App Settings.cfg file, application will now terminate.')
 
@@ -168,7 +174,10 @@ class MainApplication(tk.Frame):
             except:
                 print('\nCould not access the requested URL.')
                 print('Failed to reach: ' , full_url)
+            self.textbox_entry.configure(state= 'normal')
+            self.textbox_entry.delete(0 , tk.END)
             self.textbox_entry.insert(-1 , 'Enter Zip Code and Country Code and select GET Data to get currentweather data via call to WeatherMap API Service')
+            self.textbox_entry.configure(state= 'readonly')
         return
     
     def read_configinfo_from_file(self):
@@ -235,9 +244,9 @@ class MainApplication(tk.Frame):
         self.min_temp_entry.insert(-1, F"{temperature_unit}: {self.weather_data['main']['temp_min']}")
         self.min_temp_entry.configure(state= 'readonly')
 
-        self.temp_entry.configure(state= 'normal')
+        self.pressure_entry.configure(state= 'normal')
         self.pressure_entry.insert(-1, F"{pressure_mmHg}")
-        self.temp_entry.configure(state= 'readonly')
+        self.pressure_entry.configure(state= 'readonly')
 
         self.desc_entry.configure(state= 'normal')
         self.desc_entry.insert(-1, F"{self.weather_data['weather'][0]['description']}")
@@ -254,6 +263,25 @@ class MainApplication(tk.Frame):
         self.sunset_entry.configure(state= 'normal')
         self.sunset_entry.insert(-1, datetime.utcfromtimestamp(utc_sunset_time).strftime('%Y-%m-%d %I:%M:%S') + 'PM\n')
         self.sunset_entry.configure(state= 'readonly')
+
+        self.vis_entry.configure(state= 'normal')
+        self.vis_entry.insert(-1, F"{self.weather_data['visibility']}")
+        self.vis_entry.configure(state= 'readonly')
+
+        self.windspeed_entry.configure(state= 'normal')
+        self.windspeed_entry.insert(-1, F"Mph: {self.weather_data['wind']['speed']}")
+        self.windspeed_entry.configure(state= 'readonly')
+
+        self.wind_dir_entry.configure(state= 'normal')
+        self.wind_dir_entry.insert(-1, F"Deg: {self.weather_data['wind']['deg']}")
+        self.wind_dir_entry.configure(state= 'readonly')
+
+        self.wind_gust_entry.configure(state= 'normal')
+        try:
+            self.wind_gust_entry.insert(-1, F"Mph: {self.weather_data['wind']['gus']}")
+        except:
+            pass
+        self.wind_gust_entry.configure(state= 'readonly')
         return
 
     def empty_weather_data_widgets(self):
@@ -285,9 +313,9 @@ class MainApplication(tk.Frame):
         self.min_temp_entry.delete(0, tk.END)
         self.min_temp_entry.configure(state= 'readonly')
 
-        self.temp_entry.configure(state= 'normal')
+        self.pressure_entry.configure(state= 'normal')
         self.pressure_entry.delete(0, tk.END)
-        self.temp_entry.configure(state= 'readonly')
+        self.pressure_entry.configure(state= 'readonly')
 
         self.desc_entry.configure(state= 'normal')
         self.desc_entry.delete(0, tk.END)
@@ -304,6 +332,22 @@ class MainApplication(tk.Frame):
         self.sunset_entry.configure(state= 'normal')
         self.sunset_entry.delete(0, tk.END)
         self.sunset_entry.configure(state= 'readonly')    
+
+        self.vis_entry.configure(state= 'normal')
+        self.vis_entry.delete(0, tk.END)
+        self.vis_entry.configure(state= 'readonly')
+
+        self.windspeed_entry.configure(state= 'normal')
+        self.windspeed_entry.delete(0, tk.END)
+        self.windspeed_entry.configure(state= 'readonly')
+
+        self.wind_dir_entry.configure(state= 'normal')
+        self.wind_dir_entry.delete(0, tk.END)
+        self.wind_dir_entry.configure(state= 'readonly')
+
+        self.wind_gust_entry.configure(state= 'normal')
+        self.wind_gust_entry.delete(0, tk.END)
+        self.wind_gust_entry.configure(state= 'readonly')
         return 
 
 if __name__ == '__main__':

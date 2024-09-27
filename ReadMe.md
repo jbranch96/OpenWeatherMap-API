@@ -1,4 +1,6 @@
-This folder contains source code and an executable build for a simple weather monitioring UI application that utilizes the Weather Map API to get current weather data via utilization of an API key embedded in an HTTP request.  
+This folder contains source code and an executable build for 3 simple weather monitioring applications that utilizes the Weather Map API to get current weather data via utilization of an API key embedded in an HTTP request. 
+
+One of the 3 applications is written in LabVIEW, the other two are written in Python (GUI app and CLI app).    
 
 LabVIEW source code written in LabVIEW 2021 - 32 bit, Windows 10 enviroment
 
